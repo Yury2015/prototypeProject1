@@ -6,7 +6,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import static java.lang.Thread.sleep;
 
 /**
- * Created by Êóçíåöîâ Şğèé <kuznetsov_yura@mail.ru> on 7/10/2015.
+ * Created by ĞšÑƒĞ·Ğ½ĞµÑ†Ğ¾Ğ² Ğ®Ñ€Ğ¸Ğ¹ <kuznetsov_yura@mail.ru> on 7/10/2015.
  */
 public class Client implements Runnable {
     int target;
@@ -25,7 +25,7 @@ public class Client implements Runnable {
         int result;
         for (InputMessage m : inputMessages) {
             result = dispatcher.sendMessage(m);
-            System.out.println("Dispatcher id = " + result);
+            System.out.println("Dispatcher id = " + result + ", Executer id = " + m.getTaget() + ", " + Thread.currentThread().getName());
         }
     }
 }

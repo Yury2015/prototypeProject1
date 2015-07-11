@@ -5,7 +5,7 @@ import org.junit.Assert;
 import static org.junit.Assert.*;
 
 /**
- * Created by Кузнецов Юрий <kuznetsov_yura@mail.ru> on 7/10/2015.
+ * Created by РљСѓР·РЅРµС†РѕРІ Р®СЂРёР№ <kuznetsov_yura@mail.ru> on 7/10/2015.
  */
 public class InputMessageTest {
 

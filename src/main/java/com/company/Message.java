@@ -1,7 +1,7 @@
 package com.company;
 
 /**
- * Created by Кузнецов Юрий <kuznetsov_yura@mail.ru> on 7/10/2015.
+ * Created by РљСѓР·РЅРµС†РѕРІ Р®СЂРёР№ <kuznetsov_yura@mail.ru> on 7/10/2015.
  */
 public class Message {
     final String message;

@@ -22,8 +22,12 @@ public class Executer implements Runnable {
         if (targetId < 1 || targetId > 10) {
             return false;
         }
-        String path = getClass().getResource("/" + message.getTarget()).getPath().substring(1);
-        //System.out.println(path);
+        String path;
+        if (isWindow()) {
+            path = getClass().getResource("/" + message.getTarget()).getPath().substring(1);
+        } else {
+            path = getClass().getResource("/" + message.getTarget()).getPath();
+        }
         File f = new File(path + "/message" + message.getDispatched() + ".xml");
         FileOutputStream out = new FileOutputStream(f.getAbsoluteFile());
         out.write(message.getMessage().getBytes());
@@ -32,22 +36,14 @@ public class Executer implements Runnable {
         return true;
     }
 
+    private boolean isWindow() {
+        return System.getProperty("os.name").contains("Windows");
+    }
+
     private void delay(int milliSeconds) {
         try {
             sleep(milliSeconds);
         } catch (InterruptedException e) {
-        }
-    }
-
-    public static void main(String... args) {
-        Executer main = new Executer(new Message(1, 2));
-
-        try {
-            if (main.doWork()) {
-                System.out.println("Исполнитель готов");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
