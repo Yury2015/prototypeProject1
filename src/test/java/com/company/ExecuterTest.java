@@ -17,7 +17,7 @@ public class ExecuterTest {
     @Test
     public void testRun() throws Exception {
 
-        Thread thread = new Thread(new Executer(new Message(1, 1)));
+        Thread thread = new Thread(new Executer(new Message(1, 1), null));
         thread.start();
         thread.join();
 

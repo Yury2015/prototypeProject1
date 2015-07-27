@@ -1,9 +1,6 @@
 package com.company;
 
 import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicBoolean;
-
-import static java.lang.Thread.sleep;
 
 /**
  * Created by Кузнецов Юрий <kuznetsov_yura@mail.ru> on 7/10/2015.

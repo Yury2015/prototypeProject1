@@ -1,6 +1,5 @@
 package com.company;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -12,6 +11,8 @@ public class Dispatcher {
     private static int id = 0;
     public final static int ERROR_TARGET = -1;
     private static HashMap<Integer, Thread> map = new HashMap<Integer, Thread>();
+    private static volatile HashMap<Integer, Thread> messages = new HashMap<Integer, Thread>();
+
 
     private Dispatcher() {
     }
@@ -28,27 +29,26 @@ public class Dispatcher {
     }
 
     synchronized public int sendMessage(InputMessage message) {
-        id++;
-
         int target = message.getTaget();
 
         if (target < 1 || target > 10) {
             return ERROR_TARGET;
         }
 
-        Thread t = map.get(target);
-        if (null != t) {
-            try {
-                t.join();
-                map.remove(target);
-            } catch (InterruptedException e) {
-            }
-        }
 
-        Message m = new Message(id, target);
-        t = new Thread(new Executer(m));
-        map.put(target, t);
-        t.start();
+        Thread previousThreadOfExecutor = map.get(target);
+        Thread createdThreadOfExecutor;
+
+        createdThreadOfExecutor = new Thread(new Executer(new Message(++id, target), previousThreadOfExecutor));
+
+        map.put(target, createdThreadOfExecutor);
+        messages.put(id, previousThreadOfExecutor);
+
+        createdThreadOfExecutor.start();
         return id;
+    }
+
+    synchronized public static HashMap<Integer, Thread> getMessages() {
+        return messages;
     }
 }
